@@ -24,10 +24,9 @@
     //var_dump($router->getRoutes());
     //echo '</pre>';
 
-    // Match the requested route
+    // Match the requested route and also a check for git
 
     $url = $_SERVER['QUERY_STRING'];
-
     if ($router->match( $url) )
     {
         echo '<pre>';

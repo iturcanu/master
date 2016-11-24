@@ -8,6 +8,7 @@
 
 namespace App\Controllers;
 
+use \Core\View;
 
 class Home extends \Core\Controller
 {
@@ -17,7 +18,7 @@ class Home extends \Core\Controller
      * @return void
      */
     public function indexAction(){
-        echo "Hello from the index action in the HomeController";
+        View::render('Home/index.php', ['name' => 'Dave', 'color' => 'red, green, blue']);
     }
 
     /**
@@ -25,20 +26,14 @@ class Home extends \Core\Controller
      *
      *@return void
      */
-    protected function before()
-    {
-        echo "(before)";
-        return false;
-    }
+    protected function before(){}
 
     /**
      * After filter - called after an action method
      *
      * @return void
      */
-    protected function after()
-    {
-        echo "(after)";
-    }
+    protected function after(){}
+
 
 }

@@ -26,6 +26,8 @@
     $router->add('{controller}/{action}');
     $router->add('admin/{controller}/{action}');
     $router->add('{controller}/{id:\d+}/{action}');
+    $router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);
+
 
     // Display the routing table
     echo '<pre>';
@@ -35,15 +37,5 @@
     // Match the requested route and also a check for git
 
     $url = $_SERVER['QUERY_STRING'];
-/*
-    if ($router->match( $url) )
-    {
-        echo '<pre>';
-        var_dump($router->getParams());
-        echo '</pre>';
-    }else
-    {
-        echo 'No route found for URL '.$url;
-    }
-*/
+
 $router->dispatch($url);

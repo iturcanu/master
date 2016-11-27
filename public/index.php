@@ -5,6 +5,9 @@
      * Date: 11/15/2016
      * Time: 1:25 PM
      */
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
     spl_autoload_register(function ( $class){
         $root = dirname(__DIR__); //get the parent directory

@@ -8,12 +8,15 @@
  */
 namespace App\Controllers;
 
+use \Core\View;
+use App\Models\Post;
+
 class Posts extends \Core\Controller
 {
     protected function indexAction()
     {
-        echo 'Hello from the index function in the Post controller';
-        echo '<p>Query string parameters <pre>'. htmlspecialchars(print_r($_GET, true)).'</pre></p>';
+       $users = Post::getAll();
+       View::render('Posts/index.php', ['users'=> $users]);
     }
 
     protected function addNewAction()

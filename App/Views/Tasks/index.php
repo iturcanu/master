@@ -13,19 +13,20 @@
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
+            <th>Id</th>
             <th>Name</th>
-            <th>Email Address</th>
-            <th>Mobile Number</th>
-            <th>Action</th>
+            <th>Description</th>
+            <th>Created</th>
         </tr>
         </thead>
         <tbody>
         <?php
             foreach ($users as $row) {
                 echo '<tr>';
-                echo '<td>'. $row['first_name'] . '</td>';
-                echo '<td>'. $row['last_name'] . '</td>';
-                echo '<td>'. $row['register_date'] . '</td>';
+                echo '<td>'. $row['id'] . '</td>';
+                echo '<td>'. $row['name'] . '</td>';
+                echo '<td>'. $row['description'] . '</td>';
+                echo '<td>'. $row['created'] . '</td>';
                 echo '<td>
                            <a class="btn" href="edit?id='. $row['id'] . '">Read</a>
                            <a class="btn btn-success" href="edit?id='. $row['id'] . '">Update</a>

@@ -9,14 +9,14 @@
 namespace App\Controllers;
 
 use \Core\View;
-use App\Models\Post;
+use App\Models\Tasks as Task;
 
-class Posts extends \Core\Controller
+class Tasks extends \Core\Controller
 {
     protected function indexAction()
     {
-       $users = Post::getAll();
-       View::render('Posts/index.php', ['users'=> $users]);
+       $users = Task::getAll();
+       View::render('Tasks/list.php', ['users'=> $users]);
     }
 
     protected function addNewAction()

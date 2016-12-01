@@ -18,16 +18,18 @@ class View
      *
      * @return void
      */
-    public static function render($view, $args = [])
+    public static function render($view, $pagetitle, $args = [])
     {
         extract($args, EXTR_SKIP);
 
         $file = "../App/Views/$view"; //relative to Core directory
 
-        if( is_readable($file)) {
-            require $file;
+        $defaultView = '../App/Views/defaultView.php';
+
+        if( is_readable($defaultView)) {
+            require_once $defaultView;
         }else{
-            echo $file.' not found';
+            echo $defaultView.' not found';
         }
     }
 

@@ -16,7 +16,7 @@ class Tasks extends \Core\Controller
     protected function indexAction()
     {
        $users = Task::getAll();
-       View::render('Tasks/list.php', ['users'=> $users]);
+       View::render('Tasks/list.php', 'Tasks' ,['users'=> $users]);
     }
 
     protected function addNewAction()

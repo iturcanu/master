@@ -29,8 +29,8 @@ class Model {
         
             try{
                 $db = new PDO("mysql:host=$host; dbname=$dbName;",$user, $password);
-
                 return $db;
+
             }  catch (PDOException $e){
                 echo $e->getMessage();
             }

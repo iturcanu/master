@@ -15,13 +15,28 @@ class Tasks extends \Core\Controller
 {
     protected function indexAction()
     {
-       $users = Task::getAll();
-       View::render('Tasks/list.php', 'Tasks' ,['users'=> $users]);
+       $tasks = Task::getAll();
+       View::render('Tasks/list.php', 'Tasks' ,['tasks'=> $tasks]);
     }
 
     protected function addNewAction()
     {
-        echo 'Hello from the addNew function in the Post controller';
+        if(empty($_POST)) {
+            $users = Task::getAllUsers();
+            View::render('Tasks/createTask.php', 'Add new task', ['users'=> $users]);
+        }else{
+            var_dump($_POST);
+            $insert = [];
+            $insert['task_title'] = $_POST['task_title'];
+            $insert['assigned_to'] = $_POST['assigned_to'];
+            $insert['task_deadline'] = date('Y-m-d', strtotime($_POST['task_deadline']));
+            $insert['task_description'] = $_POST['task_description'];
+
+
+            if(Task::addTask($insert) == true){
+                echo 'Row was inserted succesfully';
+            }
+        }
     }
 
     /**
@@ -31,7 +46,14 @@ class Tasks extends \Core\Controller
      */
     protected function editAction()
     {
-        echo 'Edit function';
-        echo '<p>Route parameters <pre>'. htmlspecialchars(print_r($this->route_params, true)).'<br>'.htmlspecialchars(print_r($_GET, true)).'</pre></p>';
+
+    }
+
+    protected function viewAction()
+    {
+        $id = $_GET['id'];
+        $task = Task::getById($id);
+        View::render('Tasks/singleView.php', 'Single View | Tasks', ['id' => $id, 'task' => $task]);
+
     }
 }

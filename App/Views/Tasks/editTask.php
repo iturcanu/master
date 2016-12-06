@@ -6,60 +6,54 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="plugins/select2/select2.min.css">
 <form method="POST">
-<div class="form-group">
-    <label>Text</label>
-    <input type="text" class="form-control" name="task_title" placeholder="Enter task title">
-</div>
-<div class="box-body">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Minimal</label>
-                <select class="form-control select2" name="assigned_to" style="width: 100%;">
-                    <?php
-                    foreach($users as $key=>$user){
-                        echo '<option value='.$user["id"].'>'.$user["name"] .'</option>';
-                    }
-                    ?>
-                </select>
+    <div class="form-group">
+        <label>Text</label>
+        <input type="text" class="form-control" name="task_title" value="<?= $task['name'] ?>">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Minimal</label>
+                    <select class="form-control select2" name="assigned_to" style="width: 100%;">
+                        <?php
+                            if(isset($task['id'])){
+                                echo '<option value='.$task["userId"].'>'.$task["username"] .'</option>';
+                            }
+                            foreach($users as $key=>$user){
+                                echo '<option value='.$user["id"].'>'.$user["name"] .'</option>';
+                            }
+                        ?>
+                    </select>
+                </div>
+                <!-- /.form-group -->
             </div>
-            <!-- /.form-group -->
-        </div>
 
-<div class="form-group">
-    <label>Date:</label>
+            <div class="form-group">
+                <label>Date:</label>
 
-    <div class="input-group date">
-        <div class="input-group-addon">
-            <i class="fa fa-calendar"></i>
-        </div>
-        <input type="text" name="task_deadline" class="form-control pull-right" id="datepicker">
-    </div>
-    <!-- /.input group -->
-</div>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" name="task_deadline" class="form-control pull-right" id="datepicker" value="<?php if(isset($task['deadline'])){ echo $task['deadline'];} ?>">
+                </div>
+                <!-- /.input group -->
+            </div>
 
-<div class="box box-info">
-    <div class="box-header">
-        <h3 class="box-title">CK Editor
-            <small>Advanced and full of features</small>
-        </h3>
-        <!-- tools box -->
-        <div class="pull-right box-tools">
-            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fa fa-times"></i></button>
-        </div>
-        <!-- /. tools -->
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body pad">
-        <textarea id="editor1" name="task_description" rows="10" cols="80" style="visibility: hidden; display: none;">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3 class="box-title">CK Editor
+                        <small>Advanced and full of features</small>
+                    </h3>
+                </div>
+                <div class="box-body pad">
+        <textarea name="task_description" rows="10" cols="80"  placeholder="<?= $task['description'] ?>">
         </textarea>
-    </div>
-</div>
-        <input type="submit">
-        </form>
+                </div>
+            </div>
+            <input type="submit">
+</form>
 
 
 <!-- jQuery 2.2.3 -->

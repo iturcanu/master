@@ -35,13 +35,13 @@ class Tasks extends \Core\Model{
         try{
             $db = Model::getDB();
 
-            $stmt = $db->prepare('Select t.id, name, description, created, deadline, CONCAT(first_name,\' \', last_name) as username, avatar  from tasks t JOIN users u on t.assigned_to = u.id Where t.id = :id');
+            $stmt = $db->prepare('Select t.id, name, description, created, deadline, CONCAT(first_name,\' \', last_name) as username, u.id as userId, avatar  from tasks t JOIN users u on t.assigned_to = u.id Where t.id = :id');
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-            //$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $result;
+
         }  catch (PDOException $e){
             echo $e->getMessage();
         }

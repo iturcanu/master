@@ -25,7 +25,6 @@ class Tasks extends \Core\Controller
             $users = Task::getAllUsers();
             View::render('Tasks/createTask.php', 'Add new task', ['users'=> $users]);
         }else{
-            var_dump($_POST);
             $insert = [];
             $insert['task_title'] = $_POST['task_title'];
             $insert['assigned_to'] = $_POST['assigned_to'];
@@ -47,6 +46,10 @@ class Tasks extends \Core\Controller
     protected function editAction()
     {
 
+        $id = $_GET['id'];
+        $users = Task::getAllUsers();
+        $task = Task::getById($id);
+        View::render('Tasks/editTask.php', 'Edit', ['task'=> $task, 'users' => $users]);
     }
 
     protected function viewAction()

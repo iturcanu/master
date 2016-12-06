@@ -23,8 +23,8 @@
                         <td><?=$row['username'] ?></td>
                         <td><div class="tools">
                                 <a href="tasks/view?id=<?=$row['id'] ?>"> <i class="fa fa-eye"></i></a>
-                                <i class="fa fa-edit"></i>
-                                <i class="fa fa-trash-o"></i>
+                                <a href="tasks/edit?id=<?=$row['id'] ?>"> <i class="fa fa-edit"></i></a>
+                                <a href="tasks/delete?id=<?=$row['id'] ?>"> <i class="fa fa-trash-o"></i></a>
                             </div>
                         </td>
                     </tr>

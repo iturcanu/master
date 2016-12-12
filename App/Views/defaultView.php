@@ -43,11 +43,9 @@
         <section class="content">
 
             <?php
-            if( is_readable($file)) {
-                require_once $file;
-            }else{
-                echo $file.' not found';
-            }
+                if(file_exists($file) && !is_dir($file)) {
+                   require_once $file;
+                }
             ?>
 
         </section>

@@ -22,11 +22,15 @@ class View
     {
         extract($args, EXTR_SKIP);
 
-        $file = "../App/Views/$view"; //relative to Core directory
+        if(file_exists('../App/Views/'.$view)){
+            $file = "../App/Views/$view";
+        }else{
+            $file = "../App/Views/prosta.php";
+        }
 
         $defaultView = '../App/Views/defaultView.php';
 
-        if( is_readable($defaultView)) {
+        if(is_readable($defaultView)) {
             require_once $defaultView;
         }else{
             echo $defaultView.' not found';

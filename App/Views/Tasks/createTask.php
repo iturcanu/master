@@ -5,6 +5,11 @@
 <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
 <!-- Select2 -->
 <link rel="stylesheet" href="plugins/select2/select2.min.css">
+<?php
+    if(isset($message)){
+        echo $message;
+    }
+?>
 <form method="POST">
 <div class="form-group">
     <label>Text</label>

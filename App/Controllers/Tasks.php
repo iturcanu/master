@@ -31,9 +31,13 @@ class Tasks extends \Core\Controller
             $insert['task_deadline'] = date('Y-m-d', strtotime($_POST['task_deadline']));
             $insert['task_description'] = $_POST['task_description'];
 
-
+            $users = Task::getAllUsers();
             if(Task::addTask($insert) == true){
-                echo 'Row was inserted succesfully';
+                $message = "<div class=\"alert alert-success fade in alert-dismissable\" style=\"margin-top:18px;\">
+                     <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" title=\"close\">×</a>
+                     Your task has been added
+                 </div>";
+                View::render('Tasks/createTask.php', 'Add new task', ['message'=> "$message", 'users'=> $users]);
             }
         }
     }
@@ -45,7 +49,6 @@ class Tasks extends \Core\Controller
      */
     protected function editAction()
     {
-
         $id = $_GET['id'];
         $users = Task::getAllUsers();
         $task = Task::getById($id);

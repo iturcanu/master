@@ -48,7 +48,7 @@
                     </h3>
                 </div>
                 <div class="box-body pad">
-        <textarea name="task_description" rows="10" cols="80"  placeholder="<?= $task['description'] ?>">
+        <textarea id="editor1" name="task_description" rows="10" cols="80" style="visibility: hidden; display: none;"><?= $task['description'] ?>
         </textarea>
                 </div>
             </div>

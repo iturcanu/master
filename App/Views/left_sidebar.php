@@ -39,26 +39,26 @@
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-archive"></i> <span>Storage</span>
+                    <i class="fa fa-archive"></i> <span>Depozit</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="Tasks/index"><i class="fa fa-list"></i> List</a></li>
-                    <li><a href="Tasks/addNew"><i class="fa fa-edit"></i> Create new</a></li>
+                    <li class="active"><a href="depozit/index"><i class="fa fa-list"></i> Lista</a></li>
+                    <li><a href="depozit/addNew"><i class="fa fa-edit"></i> Creaza o inscriere</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-user"></i> <span>Users</span>
+                    <i class="fa fa-user"></i> <span>Angajati</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="Tasks/index"><i class="fa fa-list"></i> List</a></li>
-                    <li><a href="Tasks/addNew"><i class="fa fa-edit"></i> Create new</a></li>
+                    <li class="active"><a href="users/index"><i class="fa fa-list"></i> Lista</a></li>
+                    <li><a href="users/addNew"><i class="fa fa-edit"></i> Adauga</a></li>
                 </ul>
             </li>
             

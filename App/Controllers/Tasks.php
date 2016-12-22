@@ -64,18 +64,21 @@ class Tasks extends \Core\Controller
             if($task['userId'] != $_POST['assigned_to']){
                 $updated['assigen_to'] = $_POST['assigned_to'];
             }
-            if($task['deadline'] != date('Y-m-d', strtotime($_POST['task_deadline']))){
-                $updated['task_deadline'] = date('Y-m-d', strtotime($_POST['task_deadline']));
+            if(date('Y-m-d H:m', strtotime($task['deadline'])) != date('Y-m-d H:m', strtotime($_POST['task_deadline']))){
+                $updated['task_deadline'] = date('Y-m-d H:m', strtotime($_POST['task_deadline']));
             }
 
             $var = trim(strip_tags($_POST['task_description']));
-            if($task['description'] != $var){
+            $server_var = trim(strip_tags($task['description']));
+            if( $server_var != $var){
                 $updated['task_description'] = $var;
             }
 
             if(!empty($updated)){
+                echo "<pre>";
                 var_dump($updated);
-                //var_dump($task);
+                var_dump($task);
+                echo "</pre>";
             }else{
                 echo 'No changes at all';
             }

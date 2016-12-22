@@ -36,7 +36,13 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" name="task_deadline" class="form-control pull-right" id="datepicker" value="<?php if(isset($task['deadline'])){ echo $task['deadline'];} ?>">
+                    <?php
+                        $date = date('Y-m-d', strtotime($task['deadline']));
+                        $time = date('H:m', strtotime($task['deadline']));
+                        $default_value = $date.'T'.$time;
+
+                    ?>
+                    <input type="datetime-local" name="task_deadline" class="form-control pull-right" id="datepicker12" value="<?php if(isset($task['deadline'])){ echo $default_value;} ?>">
                 </div>
                 <!-- /.input group -->
             </div>

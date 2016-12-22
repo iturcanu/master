@@ -13,7 +13,7 @@
 <form method="POST">
 <div class="form-group">
     <label>Text</label>
-    <input type="text" class="form-control" name="task_title" placeholder="Enter task title">
+    <input type="text" required class="form-control" name="task_title" placeholder="Enter task title">
 </div>
 <div class="box-body">
     <div class="row">
@@ -21,6 +21,11 @@
             <div class="form-group">
                 <label>Minimal</label>
                 <select class="form-control select2" name="assigned_to" style="width: 100%;">
+                    <option disabled selected>Alege persoana responsabila</option>
+                    <option disabled>-----------</option>
+                    <option value="myId">Asignez la mine</option>
+                    <option disabled>-----------</option>
+                    
                     <?php
                     foreach($users as $key=>$user){
                         echo '<option value='.$user["id"].'>'.$user["name"] .'</option>';
@@ -38,7 +43,7 @@
         <div class="input-group-addon">
             <i class="fa fa-calendar"></i>
         </div>
-        <input type="text" name="task_deadline" class="form-control pull-right" id="datepicker">
+        <input type="datetime-local" required name="task_deadline" class="form-control pull-right">
     </div>
     <!-- /.input group -->
 </div>

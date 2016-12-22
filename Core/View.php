@@ -8,6 +8,8 @@
 
 namespace Core;
 
+use \Libraries\Url;
+
 
 class View
 {
@@ -21,7 +23,6 @@ class View
     public static function render($view, $pagetitle, $args = [])
     {
         extract($args, EXTR_SKIP);
-
         if(file_exists('../App/Views/'.$view)){
             $file = "../App/Views/$view";
         }else{

@@ -21,10 +21,10 @@ class Model {
         static $db = null;
         
         if($db === null){
-            $host = 'localhost';
-            $user = 'root';
-            $password = 'root';
-            $dbName = 'erp';
+            $host = '51.254.208.101';
+            $user = 'erp_user';
+            $password = 'user_passworD1';
+            $dbName = 'erp_db';
         
         
             try{

@@ -35,7 +35,7 @@ class Tasks extends \Core\Model{
         try{
             $db = Model::getDB();
 
-            $stmt = $db->prepare('Select t.id, name, description, created, deadline, CONCAT(first_name,\' \', last_name) as username, u.id as userId, avatar  from tasks t JOIN users u on t.assigned_to = u.id Where t.id = :id');
+            $stmt = $db->prepare('Select t.id, name, description, created, deadline, CONCAT(first_name,\' \', last_name) as username, assigned_to, u.id as userId, avatar  from tasks t JOIN users u on t.assigned_to = u.id Where t.id = :id');
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -81,4 +81,38 @@ class Tasks extends \Core\Model{
             echo $e->getMessage();
         }
     }
+
+    public static function updateTask($update = [])
+    {
+
+        if(!empty($update) && !empty($update['id'])){
+            $id = $update['id'];
+            unset($update['id']);
+
+            $last = end($update);
+            $last = key($update);
+
+            $query = "Update tasks SET ";
+            foreach($update as $key => $value){
+                $query .= '`'.$key.'` = "'.$value.'"';
+                if($key != $last){
+                    $query .= ', ';
+                }else{
+                    $query .= " ";
+                }
+            }
+            $query .= "Where id = ".$id;
+
+            $db = Model::getDB();
+            $stmt = $db->prepare($query);
+            $result = $stmt->execute();
+
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
 }
+
+

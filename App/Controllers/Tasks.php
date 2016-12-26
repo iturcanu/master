@@ -50,39 +50,62 @@ class Tasks extends \Core\Controller
     protected function editAction()
     {
         $id = $_GET['id'];
+        $users = Task::getAllUsers();
         if(empty($_POST)) {
-            $users = Task::getAllUsers();
             $task = Task::getById($id);
-            View::render('Tasks/editTask.php', 'Edit', ['task' => $task, 'users' => $users]);
+            if($task == false) {
+                View::render('emptyView.php', 'Error', ['message' => 'This task doesn\'t exists']);
+            }else {
+                View::render('Tasks/editTask.php', 'Edit', ['task' => $task, 'users' => $users]);
+            }
         }else{
             $task = Task::getById($id);
-            //var_dump($task);
-            $updated = [];
-            if($task['name'] != $_POST['task_title']){
-                $updated['task_title'] = $_POST['task_title'];
-            }
-            if($task['userId'] != $_POST['assigned_to']){
-                $updated['assigen_to'] = $_POST['assigned_to'];
-            }
-            if(date('Y-m-d H:m', strtotime($task['deadline'])) != date('Y-m-d H:m', strtotime($_POST['task_deadline']))){
-                $updated['task_deadline'] = date('Y-m-d H:m', strtotime($_POST['task_deadline']));
-            }
-
-            $var = trim(strip_tags($_POST['task_description']));
-            $server_var = trim(strip_tags($task['description']));
-            if( $server_var != $var){
-                $updated['task_description'] = $var;
-            }
-
-            if(!empty($updated)){
-                echo "<pre>";
-                var_dump($updated);
-                var_dump($task);
-                echo "</pre>";
+            if($task == false) {
+                View::render('emptyView.php', 'Error', ['message' => 'This task doesn\'t exists']);
             }else{
-                echo 'No changes at all';
-            }
+                $updated = [];
+                $updated['id'] = $id;
+                if ($task['name'] != $_POST['task_title']) {
+                    $updated['name'] = $_POST['task_title'];
+                }
+                if ($task['assigned_to'] != $_POST['assigned_to']) {
+                    $updated['assigned_to'] = $_POST['assigned_to'];
+                }
+                if (date('Y-m-d H:m', strtotime($task['deadline'])) != date('Y-m-d H:m', strtotime($_POST['task_deadline']))) {
+                    $updated['deadline'] = date('Y-m-d H:m', strtotime($_POST['task_deadline']));
+                }
 
+                $var = trim(($_POST['task_description']));
+                $server_var = trim($task['description']);
+
+                $pattern = "=^<p>(.*)</p>$=i";
+                if(preg_match($pattern, $var, $matches) == true){
+                    $var = $matches[1];
+                }
+                /*
+                echo "<pre>";
+                var_dump($var);
+                echo $server_var;
+                die();
+                */
+                if ($server_var != $var) {
+                    $updated['description'] = $var;
+                }
+
+                if (!empty($updated)) {
+                    if (Task::updateTask($updated) == true){
+                        $task = Task::getById($id);
+                        $message = "<div class=\"alert alert-success fade in alert-dismissable\" style=\"margin-top:18px;\">
+                             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" title=\"close\">×</a>
+                             Task modificat cu succes
+                         </div>";
+
+                        View::render('Tasks/editTask.php', 'Task updated', ['task' => $task, 'users' => $users, 'message' => $message]);
+                    }
+                } else {
+                        View::render('Tasks/editTask.php', 'Edit', ['task' => $task, 'users' => $users, 'message' => "The task wasn't updated"]);
+                }
+            }
 
         }
 
@@ -92,7 +115,10 @@ class Tasks extends \Core\Controller
     {
         $id = $_GET['id'];
         $task = Task::getById($id);
-        View::render('Tasks/singleView.php', 'Single View | Tasks', ['id' => $id, 'task' => $task]);
-
+        if($task == false) {
+            View::render('emptyView.php', 'Error', ['message' => 'This task doesn\'t exists']);
+        }else {
+            View::render('Tasks/singleView.php', 'Single View | Tasks', ['id' => $id, 'task' => $task]);
+        }
     }
 }

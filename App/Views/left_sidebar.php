@@ -11,7 +11,6 @@
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
-        <!-- search form -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -21,20 +20,18 @@
               </span>
             </div>
         </form>
-        <!-- /.search form -->
-        <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
+            <li class="header">Menu</li>
             <li class="active treeview">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Tasks</span>
+                    <i class="fa fa-dashboard"></i> <span>Task-uri</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="Tasks/index"><i class="fa fa-list"></i> List</a></li>
-                    <li><a href="Tasks/addNew"><i class="fa fa-edit"></i> Create new</a></li>
+                    <li class="active"><a href="Tasks/index"><i class="fa fa-list"></i>Lista</a></li>
+                    <li><a href="Tasks/addNew"><i class="fa fa-edit"></i>Crează</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -58,10 +55,9 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="active"><a href="users/index"><i class="fa fa-list"></i> Lista</a></li>
-                    <li><a href="users/addNew"><i class="fa fa-edit"></i> Adauga</a></li>
+                    <li><a href="users/addNew"><i class="fa fa-edit"></i>Adauga</a></li>
                 </ul>
             </li>
         </ul>
     </section>
-    <!-- /.sidebar -->
 </aside>

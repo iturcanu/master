@@ -11,12 +11,11 @@
  *
  * @author John
  */
+namespace App\Libraries;
+
 class Url {
-    public $home;
-    
+
     public static function getHome(){
-        $this->home = $_SERVER['REQUEST_URI'];
-        
-        return $this->home;
+        return 'http://'.$_SERVER['SERVER_NAME'];
     }
 }

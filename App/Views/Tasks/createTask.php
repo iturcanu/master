@@ -25,7 +25,7 @@
                     <option disabled>-----------</option>
                     <option value="myId">Asignez la mine</option>
                     <option disabled>-----------</option>
-                    
+
                     <?php
                     foreach($users as $key=>$user){
                         echo '<option value='.$user["id"].'>'.$user["name"] .'</option>';
@@ -43,7 +43,7 @@
         <div class="input-group-addon">
             <i class="fa fa-calendar"></i>
         </div>
-        <input type="datetime-local" required name="task_deadline" class="form-control pull-right">
+        <input type="datetime-local" required name="task_deadline" class="form-control pull-right" id="datepicker">
     </div>
     <!-- /.input group -->
 </div>
@@ -71,6 +71,11 @@
         <input type="submit">
         </form>
 
+<!-- jQuery 2.2.3 -->
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- Select2 -->
 <!-- Select2 -->
 <script src="plugins/select2/select2.full.min.js"></script>
 <!-- InputMask -->

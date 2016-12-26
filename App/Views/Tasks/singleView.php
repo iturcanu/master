@@ -17,7 +17,7 @@
                 <button type="button" class="btn btn-success btn-sm ">Finisat</button>
             </div>
             <div class="col-md-6">
-                <a  href="http://mvc.app/tasks/edit?id=<?=$task['id'] ?>">
+                <a  href="<?=\App\Libraries\Url::getHome().'/tasks/edit?id='.$task['id'] ?>">
                     <button type="button" class="btn btn-sm pull-right"><i class="fa fa-edit"></i> Modifica</button>
                 </a>
             </div>

@@ -126,4 +126,15 @@ class Tasks extends \Core\Controller
             View::render('Tasks/singleView.php', 'Single View | Tasks', ['id' => $id, 'task' => $task, 'statuses' => $statuses]);
         }
     }
+    
+    protected function setStatusAction() {
+        $task_id = $_GET['task_id'];
+        $task_status_id = $_GET['status_id'];
+        $task_status = $_GET['task_status'];
+        $message = "<div class=\"alert alert-success fade in alert-dismissable\" style=\"margin-top:18px;\">
+                             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" title=\"close\">×</a>
+                             Statutul taskului $task_id a fost setat ca \"$task_status\"
+                         </div>";
+        echo $message;
+    }
 }

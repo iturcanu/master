@@ -12,9 +12,11 @@
         </div>
         <div class="col-md-12">
             <div class="buttons col-md-6">
-                <button type="button" class="btn btn-primary btn-sm ">În progres</button>
-                <button type="button" class="btn btn-warning btn-sm ">În așteptare</button>
-                <button type="button" class="btn btn-success btn-sm ">Finisat</button>
+                <?php
+                foreach($statuses as $key => $name){
+                    echo '<button type="button" class="btn btn-sm status-button" id="'.$name["id"].'">'.$name["name"].'</button> ';
+                }
+                 ?>
             </div>
             <div class="col-md-6">
                 <a  href="<?=\App\Libraries\Url::getHome().'/tasks/edit?id='.$task['id'] ?>">
@@ -36,3 +38,12 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".status-button").on("click",function(){
+            var id = this.id;
+            console.log(id);
+        });
+    });
+</script>

@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * Created by PhpStorm.
  * User: ioturcanu
@@ -8,6 +10,7 @@
  */
 namespace App\Controllers;
 
+use Core\Model;
 use \Core\View;
 use App\Models\Tasks as Task;
 
@@ -51,6 +54,7 @@ class Tasks extends \Core\Controller
     {
         $id = $_GET['id'];
         $users = Task::getAllUsers();
+
         if(empty($_POST)) {
             $task = Task::getById($id);
             if($task == false) {
@@ -115,10 +119,11 @@ class Tasks extends \Core\Controller
     {
         $id = $_GET['id'];
         $task = Task::getById($id);
+        $statuses = Task::getStatuses();
         if($task == false) {
             View::render('emptyView.php', 'Error', ['message' => 'This task doesn\'t exists']);
         }else {
-            View::render('Tasks/singleView.php', 'Single View | Tasks', ['id' => $id, 'task' => $task]);
+            View::render('Tasks/singleView.php', 'Single View | Tasks', ['id' => $id, 'task' => $task, 'statuses' => $statuses]);
         }
     }
 }

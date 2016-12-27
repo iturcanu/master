@@ -113,6 +113,23 @@ class Tasks extends \Core\Model{
         }
     }
 
+    public static function getStatuses()
+    {
+
+        try{
+            $db = Model::getDB();
+
+            $stmt = $db->prepare('Select id, name FROM task_status');
+            $stmt->execute();
+            //$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        }  catch (PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
 }
 
 

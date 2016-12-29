@@ -43,7 +43,7 @@
                     </div>
                     <?php
                         $date = date('Y-m-d', strtotime($task['deadline']));
-                        $time = date('H:m', strtotime($task['deadline']));
+                        $time = date('H:i', strtotime($task['deadline']));
                         $default_value = $date.'T'.$time;
 
                     ?>

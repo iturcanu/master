@@ -27,7 +27,7 @@ class View
         if(file_exists('../App/Views/'.$view)){
             $file = "../App/Views/$view";
         }else{
-            $file = "../App/Views/prosta.php";
+            $file = "../App/Views/empty.php";
         }
 
         $defaultView = '../App/Views/defaultView.php';
@@ -37,6 +37,24 @@ class View
         }else{
             echo $defaultView.' not found';
         }
+    }
+
+    public static function renderDefault($includedView, $view, $pagetitle, $args = []){
+        extract($args, EXTR_SKIP);
+        if(isset($includedView) && file_exists('../App/Views/'.$includedView)){
+            $includedView = '../App/Views/'.$includedView;
+        }
+
+        if(isset($view) && file_exists('../App/Views/'.$view)){
+            $file = '../App/Views/'.$view;
+        }
+
+        if(is_readable($includedView)){
+            require_once $includedView;
+        }
+
+
+
     }
 
 }

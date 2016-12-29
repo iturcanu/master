@@ -5,6 +5,8 @@
      * Date: 11/15/2016
      * Time: 1:25 PM
      */
+    session_start();
+
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -15,7 +17,7 @@
         if (is_readable($file)) {
             require_once $root .'/'. str_replace('\\', '/', $class) .'.php';
         }
-});
+    });
 
     $router = new Core\Router();
 
@@ -34,5 +36,8 @@
     // Match the requested route and also a check for git
 
     $url = $_SERVER['QUERY_STRING'];
-
-$router->dispatch($url);
+    if(!isset($_SESSION['logged_in'])){
+        \App\Controllers\Login::indexAction();
+    }else{
+        $router->dispatch($url);
+    }

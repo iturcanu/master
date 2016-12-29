@@ -72,10 +72,10 @@ class Router
                     echo "Method $action (in controller $controller) not found";
                 }
             }else{
-                echo "Controller class $controller not found";
+                $this->show404();
             }
         }else{
-            echo "No route matched.";
+            $this->show404();
         }
     }
 
@@ -182,5 +182,21 @@ class Router
     public function getRoutes()
     {
         return $this->routes;
+    }
+
+    public function show404(){
+        $this->params = [];
+        $controller = 'Controller_404';
+        //$controller = $this->params['controller'];
+        $action = 'index';
+        $controller = $this->convertToStudlyCaps($controller);
+        $controller = $this->getNamespace().$controller;
+        $action = $this->convertToCamelCase($action);
+
+        $controller_object = new $controller('');
+
+        if(is_callable([$controller_object, $action])) {
+            $controller_object->$action();
+        }
     }
 }

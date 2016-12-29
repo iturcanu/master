@@ -75,7 +75,7 @@ class Tasks extends \Core\Model{
             $stmt->bindParam(':assigned_to', $assigned_to, PDO::PARAM_INT);
             $result = $stmt->execute();
 
-            return $stmt;
+            return $result;
 
         }  catch (PDOException $e){
             echo $e->getMessage();
@@ -106,8 +106,12 @@ class Tasks extends \Core\Model{
             $db = Model::getDB();
             $stmt = $db->prepare($query);
             $result = $stmt->execute();
-
-            return $result;
+            if($result == true) {
+                return $result;
+            }else{
+                return $stmt->errorInfo();
+            }
+            return $query;
         }else{
             return false;
         }
@@ -119,9 +123,8 @@ class Tasks extends \Core\Model{
         try{
             $db = Model::getDB();
 
-            $stmt = $db->prepare('Select id, name FROM task_status');
+            $stmt = $db->prepare('Select id, name FROM task_status where id != 4');
             $stmt->execute();
-            //$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
@@ -130,6 +133,25 @@ class Tasks extends \Core\Model{
         }
     }
 
+    public static function setStatus($task_id, $status_id)
+    {
+        if(isset($task_id) && !empty($task_id) && isset($status_id) && !empty($status_id)) {
+            try {
+                $db = Model::getDB();
+
+                $query = "update tasks set task_status = :status_id where id = :task_id";
+                $stmt = $db->prepare($query);
+                $stmt->bindParam(':task_id', $task_id, PDO::PARAM_INT);
+                $stmt->bindParam(':status_id', $status_id, PDO::PARAM_INT);
+
+                $result = $stmt->execute();
+
+                return $result;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+    }
+
+
 }
-
-

@@ -43,7 +43,7 @@ class Validation{
         }
         
         if (!empty($field) && is_string($field) && !is_numeric($field)){
-            //return True;
+            return True;
         }elseif(empty($field)){
             $res = $field_name.' can\'t be empty';
         }else{
@@ -89,7 +89,8 @@ class Validation{
     }
     
     static function login($field, $field_name, $required = True){
-        
+
+        return $field;
         if(isset($field)){
             $field = trim($field);
         }
@@ -110,6 +111,8 @@ class Validation{
         
         if(!empty($res)){
             return $res;
+        }else{
+            return 'rez e empty in validation';
         }
         
     }

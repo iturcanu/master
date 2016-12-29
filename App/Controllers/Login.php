@@ -7,13 +7,37 @@
  */
 
 namespace App\Controllers;
+use App\Libraries\Message;
+use App\Libraries\Url;
+use App\Libraries\Validation;
+use App\Models\User;
 use Core\Controller;
 use Core\Model;
 use \Core\View;
 
 class Login extends \Core\Controller
 {
-    public static function indexAction(){
-        View::renderDefault('Login/defaultView.php', 'Login/loginView.php', 'Login');
+    public static function indexAction()
+    {
+        if (empty($_POST)) {
+            View::renderDefault('Login/defaultView.php', 'Login/loginView.php', 'Login');
+        }elseif(isset($_POST['email'])){
+            $email = trim($_POST['email']);
+            $password = trim($_POST['password']);
+
+            $user = User::getUserByEmail($email);
+            if($user != false && is_array($user)){
+                if($user[0]['password'] === md5($password)) {
+                    $_SESSION['logged_in'] = true;
+                    header('Location: ' . Url::getHome());
+                }else{
+                    $message = Message::error('Login sau parolă introdusă incorect');
+                    View::renderDefault('Login/defaultView.php', 'Login/loginView.php', 'Login', ['error_message' => $message]);
+                }
+            }else{
+                $message = Message::error('Login sau parolă introdusă incorect');
+                View::renderDefault('Login/defaultView.php', 'Login/loginView.php', 'Login', ['error_message' => $message]);
+            }
+        }
     }
 }

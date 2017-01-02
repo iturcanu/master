@@ -4,10 +4,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?php if(isset($_SESSION['avatar'])){echo $_SESSION['avatar']; };?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p><?php if(isset($_SESSION['user_name'])){echo $_SESSION['user_name']; };?></p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -54,8 +54,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="users/index"><i class="fa fa-list"></i> Lista</a></li>
-                    <li><a href="users/addNew"><i class="fa fa-edit"></i>Adauga</a></li>
+                    <li class="active"><a href="user/index"><i class="fa fa-list"></i> Lista</a></li>
+                    <li><a href="user/addNew"><i class="fa fa-edit"></i>Adauga</a></li>
                 </ul>
             </li>
         </ul>

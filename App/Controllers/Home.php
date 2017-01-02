@@ -19,7 +19,7 @@ class Home extends \Core\Controller
      */
     public function indexAction(){
         $params = $_GET;
-        View::render('Home/index.php', 'Home', ['name' => 'Dave', 'color' => 'red, green, blue', 'params' => $params]);
+        View::render('Home/index.php', 'Home');
     }
 
     /**

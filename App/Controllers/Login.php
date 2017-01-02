@@ -27,8 +27,15 @@ class Login extends \Core\Controller
 
             $user = User::getUserByEmail($email);
             if($user != false && is_array($user)){
-                if($user[0]['password'] === md5($password)) {
+                $user = $user[0];
+                if($user['password'] === md5($password)) {
                     $_SESSION['logged_in'] = true;
+                    $_SESSION['userId'] = $user['id'];
+                    $_SESSION['userEmail'] = $user['email'];
+
+                    $_SESSION['user_name'] = $user['first_name'].' '.$user['last_name'];
+                    $_SESSION['avatar'] = $user['avatar'];
+
                     header('Location: ' . Url::getHome());
                 }else{
                     $message = Message::error('Login sau parolă introdusă incorect');

@@ -5,6 +5,7 @@
  * Date: 5/11/2016
  * Time: 12:43 PM
  */
+namespace App\Libraries;
 
 class Session{
 

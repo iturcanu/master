@@ -62,6 +62,10 @@ class Router
             {
                 $controller_object = new $controller($this->params);
 
+                if(!isset($this->params['action']) && empty($this->params['action'])){
+                    $this->params['action'] = 'index';
+                }
+
                 $action = $this->params['action'];
                 $action = $this->convertToCamelCase($action);
 

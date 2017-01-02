@@ -1,10 +1,29 @@
 <?php
-    class Controller_User extends Controller{
-        
-        function __construct() {
-            parent::__construct();
+namespace App\Controllers;
+use Core\Controller;
+use App\Models\User as UserModel;
+use App\Libraries\Session;
+use Core\View;
+
+class User extends Controller{
+
+        protected $model;
+
+        public function __construct()
+        {
+            $this->model = new UserModel();
         }
-                
+
+        public function indexAction(){
+            $user['user_name'] = $_SESSION['user_name'];
+            $user['email'] = $_SESSION['userEmail'];
+            $user['avatar'] = $_SESSION['avatar'];
+
+            View::render('User/userView.php', 'Users', ['user' => $user]);
+
+        }
+
+
         static function createUser($first_name, $last_name, $email, $login, $password){
             //include_once '../models/user.php';
             $model = new User();
@@ -13,8 +32,8 @@
         
         function action_update(){
             
-            $model = new User();
-            $user = $model->getUserById(Session::get('userId'));            
+
+            $user = $this->model->getUserById(Session::get('userId'));
             $result = '';
             
             if(!empty($_POST)){

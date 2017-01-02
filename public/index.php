@@ -29,6 +29,7 @@
     $router->add('posts/new', ['controller' => 'Tasks', 'action' => 'new']);
     */
     $router->add('{controller}/{action}');
+    $router->add('{controller}');
     $router->add('admin/{controller}/{action}');
     $router->add('{controller}/{id:\d+}/{action}');
     $router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);

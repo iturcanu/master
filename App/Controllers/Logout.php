@@ -1,7 +1,10 @@
 <?php
-class Controller_Logout extends Controller
+namespace App\Controllers;
+use Core\Controller;
+
+class Logout extends Controller
 {
-    function action_index()
+    public function indexAction()
     {        
         setcookie('PHPSESSID', '');
         session_destroy();

@@ -35,6 +35,7 @@ class Login extends \Core\Controller
 
                     $_SESSION['user_name'] = $user['first_name'].' '.$user['last_name'];
                     $_SESSION['avatar'] = $user['avatar'];
+                    $_SESSION['functie'] = $user['functie'];
 
                     header('Location: ' . Url::getHome());
                 }else{

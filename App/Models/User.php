@@ -34,7 +34,7 @@ class User extends \Core\Model
         $db = Model::getDB();
         //$this->db->getDB();
         if(isset($email) && !empty($email)){
-            $querry = 'Select * from users where email = :email';
+            $querry = 'Select u.*, r.name as functie from users u JOIN user_roles r on r.id = u.role where u.email = :email';
             $stmt = $db->prepare($querry);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->execute();
@@ -250,15 +250,15 @@ class User extends \Core\Model
 
     public function getUserById($id){
         $db = Model::getDB();
-        $sql = 'SELECT * FROM users WHERE id= :id';
+        $sql = ' SELECT users.id, CONCAT(first_name, \' \', last_name) as user_name, avatar, email, r.name as functie from users JOIN user_roles r on r.id = users.role where users.id = :id';
         $sth = $db->prepare($sql);
         $sth->bindParam(':id', $id, PDO::PARAM_INT);
         try {
             $sth->execute();
-            $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+            $result = $sth->fetch(PDO::FETCH_ASSOC);
             return $result;
         } catch (PDOException $e) {
-            Logging::register()->error($e->getMessage());
+            //Logging::register()->error($e->getMessage());
             return False;
         }
     }
@@ -288,6 +288,22 @@ class User extends \Core\Model
             'avatar' => $this->avatar,
             'biography'=> $this->biography
         ]) ;
+    }
+
+    public function getAllUsers(){
+        $db = $this->db;
+
+        $sql = 'SELECT users.id, CONCAT(first_name, \' \', last_name) as user_name, avatar, email, r.name as functie from users JOIN user_roles r on r.id = users.role';
+
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+        if($result == True){
+            return $result;
+        }else{
+            return $sth->errorInfo();
+        }
     }
 
 }

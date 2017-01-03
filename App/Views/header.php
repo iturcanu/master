@@ -217,10 +217,10 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="<?php if(isset($_SESSION['avatar'])){echo $_SESSION['avatar']; };?>" class="img-circle" alt="User Image">
 
                             <p>
-                                Alexander Pierce - Web Developer
+                                <?php if(isset($_SESSION['user_name'])){echo $_SESSION['user_name']; };?> - <?php if(isset($_SESSION['functie'])){echo $_SESSION['functie']; };?>
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>
@@ -249,10 +249,6 @@
                             </div>
                         </li>
                     </ul>
-                </li>
-                <!-- Control Sidebar Toggle Button -->
-                <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>
             </ul>
         </div>

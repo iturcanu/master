@@ -2,7 +2,7 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
-        <div class="user-panel">
+        <!--<div class="user-panel">
             <div class="pull-left image">
                 <img src="<?php if(isset($_SESSION['avatar'])){echo $_SESSION['avatar']; };?>" class="img-circle" alt="User Image">
             </div>
@@ -19,10 +19,10 @@
                 </button>
               </span>
             </div>
-        </form>
+        </form>-->
         <ul class="sidebar-menu">
             <li class="header">Menu</li>
-            <li class="active treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Task-uri</span>
                     <span class="pull-right-container">
@@ -30,7 +30,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="Tasks/index"><i class="fa fa-list"></i>Lista</a></li>
+                    <li><a href="Tasks/index"><i class="fa fa-list"></i>Lista</a></li>
                     <li><a href="Tasks/addNew"><i class="fa fa-edit"></i>Crează</a></li>
                 </ul>
             </li>

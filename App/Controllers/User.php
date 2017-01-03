@@ -14,13 +14,22 @@ class User extends Controller{
             $this->model = new UserModel();
         }
 
-        public function indexAction(){
+        public function indexAction()
+        {
+            $users = $this->model->getAllUsers();
+            View::render('User/list.php', 'All Users', ['users' => $users]);
+
+        }
+
+        public function viewAction(){
+            /*
             $user['user_name'] = $_SESSION['user_name'];
             $user['email'] = $_SESSION['userEmail'];
             $user['avatar'] = $_SESSION['avatar'];
-
-            View::render('User/userView.php', 'Users', ['user' => $user]);
-
+            */
+            $id = $_GET['id'];
+            $user = $this->model->getUserById($id);
+            View::render('User/userView.php', 'Users : '.$user['user_name'] , ['user' => $user]);
         }
 
 
@@ -30,8 +39,8 @@ class User extends Controller{
             $user = $model->createUser($first_name, $last_name, $email, $login, $password);
         }
         
-        function action_update(){
-            
+        function updateAction(){
+
 
             $user = $this->model->getUserById(Session::get('userId'));
             $result = '';

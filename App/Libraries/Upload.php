@@ -1,4 +1,6 @@
 <?php
+namespace App\Libraries;
+
     class Upload{
 		
         function image($image, $user)
@@ -31,7 +33,7 @@
             $this->name = $imagine['name'];
             $path = $_SERVER["DOCUMENT_ROOT"];
             $path = rtrim($path, '/') . '/';
-            $this->uploads_dir = $path . 'images/users';
+            $this->uploads_dir = $path . 'img/users';
 			$extension = '';
 			
 			switch(mime_content_type($imagine['tmp_name'])){
@@ -45,7 +47,7 @@
 			
             
             if(move_uploaded_file($imagine['tmp_name'], $this->uploads_dir . "/" . $name)){
-                    return 'images/users'. "/" . $name;
+                    return 'img/users'. "/" . $name;
             }else{
                     return False ;
             }

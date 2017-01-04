@@ -250,7 +250,7 @@ class User extends \Core\Model
 
     public function getUserById($id){
         $db = Model::getDB();
-        $sql = ' SELECT users.id, CONCAT(first_name, \' \', last_name) as user_name, avatar, email, r.name as functie from users JOIN user_roles r on r.id = users.role where users.id = :id';
+        $sql = ' SELECT users.id, first_name, last_name, CONCAT(first_name, \' \', last_name) as user_name, avatar, email, r.name as functie from users JOIN user_roles r on r.id = users.role where users.id = :id';
         $sth = $db->prepare($sql);
         $sth->bindParam(':id', $id, PDO::PARAM_INT);
         try {

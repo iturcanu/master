@@ -5,10 +5,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+namespace App\Libraries;
 
 class Filter{
     
     static function value($var){
-        return strip_tags($var);
+        $value =  strip_tags($var);
+        return trim($value);
     }
 }

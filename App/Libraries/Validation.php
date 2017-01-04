@@ -24,7 +24,6 @@ class Validation{
     static function numeric($field, $field_name, $required = True){
         $field = trim($field);
         if (!empty($field) && is_numeric($field) && $field > 0){
-            //return True;
         }elseif(empty($field)){
             $res = $field_name.' can\'t be empty';
         }else{
@@ -43,7 +42,6 @@ class Validation{
         }
         
         if (!empty($field) && is_string($field) && !is_numeric($field)){
-            return True;
         }elseif(empty($field)){
             $res = $field_name.' can\'t be empty';
         }else{

@@ -43,11 +43,11 @@ class User extends Controller
 
     function editAction()
     {
-        $user = $this->model->getUserById(Session::get('userId'));
+        $user = $this->model->getUserById($_GET['id']);
         $result = '';
 
         if (!empty($_POST)) {
-            $update['id'] = Session::get('userId');
+            $update['id'] = $_GET['id'];
             $response = array();
             if (isset($_POST['first_name'])) {
                 $response[] = Validation::string($_POST['first_name'], 'first name');
@@ -105,36 +105,24 @@ class User extends Controller
 
                 //$result = $model->updateUser(Session::get('userId'), $_POST['first_name'], $_POST['last_name'], $_POST['birthDate'], $_POST['email'], $avatar_name);
                 if (!empty($update)) {
-                    echo "<pre>";
                     //var_dump($update);
                     if (!empty($update) && !empty($update['id'])) {
-                        $id = $update['id'];
-                        unset($update['id']);
-
-                        $last = end($update);
-                        $last = key($update);
-
-                        $query = "Update users SET ";
-                        $id = 0;
-                        foreach ($update as $key => $value) {
-                            $query .= '`' . $key . '` = ":' . $key . '"';
-                            if ($key != $last) {
-                                $query .= ', ';
-                            } else {
-                                $query .= " ";
-                            }
-                            $bind[$id]['key'] = $key;
-                            $bind[$id]['value'] = $value;
-                            $id++;
+                        $result = $this->model->updateUser($update);
+                        if($result == true){
+                            $user = $this->model->getUserById($_GET['id']);
+                            View::render('User/update.php', 'Update', ['user' => $user]);
+                            //echo 'a mers';
+                        }else{
+                            echo 'nu a mers';
                         }
-                        $query .= "Where id = " . $id;
+                        /*
 
                         foreach ($bind as $key=>$item) {
                             echo "bindParam(':$item[key]', '$item[value]', PDO::PARAM_STR)<br>";
                         }
                         echo $query;
+                        */
                         //var_dump($bind);
-                        echo "</pre>";
                     } else {
                         echo 'Nui nimic de facut update';
                     }
@@ -147,7 +135,7 @@ class User extends Controller
                     View::render('User/update.php', 'Update error', ['user' => $user, 'message' => $error]);
             }
         } else {
-            $user = $this->model->getUserById(Session::get('userId'));
+            $user = $this->model->getUserById($_GET['id']);
             //var_dump($user);
             View::render('User/update.php', 'Update', ['user' => $user]);
         }

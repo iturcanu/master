@@ -154,99 +154,38 @@ class User extends \Core\Model
         }
     }
 
-    public function updateUser($userId, $first_name, $last_name, $birthDate, $email, $avatar){
-        if($this->id == 0 ){
-            $this->obj = $this->getUserById($userId);
-        }
-        $sql = "UPDATE users SET ";
-        $querry = array();
+    public function updateUser($update){
+        $user_id = $update['id'];
+        unset($update['id']);
 
-        if ($this->obj->getEmail() !== $email) {
-            $email = Filter::value($email);
-            $querry['sql'][] = "email = :email";
-            $querry['params']['email'] = $email;
-        }
+        $last = end($update);
+        $last = key($update);
 
-        if ($this->obj->getFirstName() !== $first_name) {
-            $first_name = Filter::value($first_name);
-            $querry['sql'][] = "first_name = :first_name";
-            $querry['params']['first_name'] = $first_name;
-        }
-
-        if ($this->obj->getLastName() !== $last_name) {
-            $last_name = Filter::value($last_name);
-            $querry['sql'][] = "last_name = :last_name";
-            $querry['params']['last_name'] = $last_name;
-        }
-
-        if ($this->obj->getBirthDate() !== $birthDate) {
-            $birthDate = Filter::value($birthDate);
-            $querry['sql'][] = "birthDate = :birthDate";
-            $querry['params']['birthDate'] = $birthDate;
-        }
-
-        if ($this->obj->getAvatar() !== $avatar) {
-            $avatar = Filter::value($avatar);
-            $querry['sql'][] = "avatar = :avatar";
-            $querry['params']['avatar'] = $avatar;
-        }
-
-        $sql = "UPDATE user SET ";
-
-        foreach($querry['sql'] as $key=>$stmt){
-            if($key > 0){
-                $sql .= ', '.$stmt;
-            }else{
-                $sql .= $stmt;
+        $query = "Update users SET ";
+        $id = 0;
+        foreach ($update as $key => $value) {
+            $query .= '' . $key . ' = :'.$key;
+            if ($key != $last) {
+                $query .= ', ';
+            } else {
+                $query .= " ";
             }
+            $id++;
         }
-        $sql .= " WHERE id = :userId";
+        $query .= "Where id = " . $user_id;
+        $sth = $this->db->prepare($query);
 
-
-        $sth = $this->db->prepare($sql);
-
-        $sth->bindParam('userId', $userId, PDO::PARAM_INT);
-
-        foreach($querry['params'] as $key=>$value){
-            $sth->bindParam(":$key", $querry['params'][$key], PDO::PARAM_STR);
+        foreach ($update as $key=>&$item) {
+            $sth->bindParam(':'.$key.'', $item, PDO::PARAM_STR);
         }
-
 
         try {
             $sth->execute();
-            Logging::register()->info("The user with id $userId was updated succesfully ".$sql);
-            Logging::register()->debug($sql);
             return True;
         } catch (PDOException $e) {
-            Logging::register()->error($e->getMessage());
             return False;
         }
     }
-
-    public function updateUserPassword($userId, $password){
-        if($this->id == 0 ){
-            $this->obj = $this->getUserById($userId);
-        }
-        $sql = "UPDATE user SET ";
-        if ($this->obj->getPassword() !== $password) {
-            $password = Filter::value($password);
-            $sql .= "password = :password";
-            $sql .= " WHERE id = :userId";
-        }
-        $sth = $this->db->prepare($sql);
-        $sth->bindParam('password', $password, PDO::PARAM_STR);
-        $sth->bindParam('userId', $userId, PDO::PARAM_STR);
-
-        try {
-            $sth->execute();
-            Logging::register()->info("The user with id $userId succesfully updated his password ".$sql);
-            return True;
-        } catch (PDOException $e) {
-            Logging::register()->error($e->getMessage());
-            return False;
-        }
-    }
-
 
     public function getUserById($id){
         $db = Model::getDB();

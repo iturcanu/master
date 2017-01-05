@@ -24,8 +24,8 @@ class Login extends \Core\Controller
         }elseif(isset($_POST['email'])){
             $email = trim($_POST['email']);
             $password = trim($_POST['password']);
-
-            $user = User::getUserByEmail($email);
+            $model = new User();
+            $user = $model->getUserByEmail($email);
             if($user != false && is_array($user)){
                 $user = $user[0];
                 if($user['password'] === md5($password)) {

@@ -55,7 +55,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="active"><a href="user/index"><i class="fa fa-list"></i> Lista</a></li>
-                    <li><a href="user/addNew"><i class="fa fa-edit"></i>Adauga</a></li>
+                    <!--<li><a href="user/addNew"><i class="fa fa-edit"></i>Adauga</a></li>-->
                 </ul>
             </li>
         </ul>

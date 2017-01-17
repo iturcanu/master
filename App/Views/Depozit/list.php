@@ -23,8 +23,6 @@
                         <td><?=$row['created'] ?></td>
                         <td><div class="tools">
                                 <a href="depozit/view?id=<?=$row['id'] ?>"> <i class="fa fa-eye"></i></a>
-                                <a href="depozit/edit?id=<?=$row['id'] ?>"> <i class="fa fa-edit"></i></a>
-                                <a href="depozit/delete?id=<?=$row['id'] ?>"> <i class="fa fa-trash-o"></i></a>
                             </div>
                         </td>
                     </tr>

@@ -94,4 +94,20 @@ class Depozit extends Controller
             echo false;
         }
     }
+
+    public function requestAction(){
+        if(isset($_GET['id'])) {
+            $id = intval($_GET['id']);
+            $item = $this->model->getById($id);
+            $categories = $this->model->getCategories();
+            if(is_array($item)) {
+                //View::render('Depozit/requestView.php', 'Depozit - ' . $item['name'], ['item' => $item, 'categories' => $categories]);
+                var_dump($item);
+            }else{
+                header('location:'.Url::getHome().'/depozit');
+            }
+        }else{
+            header('location:'.Url::getHome().'/depozit');
+        }
+    }
 }

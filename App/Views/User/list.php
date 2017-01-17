@@ -24,7 +24,6 @@
                         <td><div class="tools">
                                 <a href="user/view?id=<?=$user['id'] ?>"> <i class="fa fa-eye"></i></a>
                                 <a href="user/edit?id=<?=$user['id'] ?>"> <i class="fa fa-edit"></i></a>
-                                <a href="user/delete?id=<?=$user['id'] ?>"> <i class="fa fa-trash-o"></i></a>
                             </div>
                         </td>
                     </tr>

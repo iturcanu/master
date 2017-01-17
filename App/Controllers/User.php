@@ -194,7 +194,9 @@ class User extends Controller
             }
         }
 
-
+        function addNewAction(){
+            View::render('Home/index.php', 'Home');
+        }
 
 }
 ?>
